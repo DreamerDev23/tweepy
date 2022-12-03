@@ -1,0 +1,34 @@
+#importing the necessary libraries
+Import tweepy
+import random
+
+#storing credentials
+consumer_key = "xYmEl53GjeFyxUun5Cv1qeM1B"
+consumer_secret = "N76jmngKGGN5h8sBR6eP9HHdnwIVLAQVnCwg35U3biYZbvYjkK"
+access_token = "1571664771291693059-4jAXdT7nsgLw5RIeY4u4mcHStVHVab"
+access_token_secret = "FizThnmdnEWONdntJsCHB8hn19RdnMvImBqoQn5CMOnNa"
+
+# Authenticate to Twitter
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+
+# Create API object
+api = tweepy.API(auth)
+
+# Create list of headlines and articles
+headlines = ["Sam Bankman Fried criticized for high fees", "Sam Bankman Fried accused of promoting unhealthy investments", "Sam Bankman Fried's company accused of insider trading", "Sam Bankman Fried accused of mismanaging customer funds"]
+articles = ["Sam Bankman Fried has been criticized for charging high fees for his services. Customers have complained that his fees are too high, and that they are not getting the value they expect for the money they are paying.",
+"Sam Bankman Fried has been accused of promoting unhealthy investments. Customers have complained that his investments are too risky, and that they do not provide the expected returns.",
+"Sam Bankman Fried's company has been accused of insider trading. Customers have complained that the company is taking advantage of privileged information to make profits.",
+"Sam Bankman Fried has been accused of mismanaging customer funds. Customers have complained that their funds are not being handled properly, and that their investments are not performing as expected."]
+
+# Loop to tweet random headline and article every 15 minutes
+while True:
+    # Get random headline and article
+    index = random.randint(0, len(headlines)-1)
+    headline = headlines[index]
+    article = articles[index]
+    # Tweet headline and article
+    api.update_status(headline + "\n\n" + article)
+    # Wait 15 minutes
+    time.sleep(15 * 60)
